@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="dgI-Ib-xML">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="dgI-Ib-xML">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -32,7 +32,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5Qb-7B-JIw" id="rnx-7d-Y3e">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -47,7 +47,49 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h0n-9t-bAQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1076" y="807.34632683658174"/>
+            <point key="canvasLocation" x="337" y="139"/>
+        </scene>
+        <!--Account Created-->
+        <scene sceneID="9lf-15-BgY">
+            <objects>
+                <viewController id="VuE-Wx-gtm" customClass="AccountCreated" customModule="OneDay" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ygf-G5-3QN"/>
+                        <viewControllerLayoutGuide type="bottom" id="TPJ-K1-CPw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GxG-pJ-bGP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="vCc-vp-uYT" kind="show" identifier="done" id="JzP-Rw-qL0"/>
+                        <segue destination="5D8-Yw-mGu" kind="presentation" identifier="fromac" id="vDn-Ak-tKa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f1g-xs-kBJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="337" y="-536"/>
+        </scene>
+        <!--OrganizationVC-->
+        <scene sceneID="Git-el-CbV">
+            <objects>
+                <viewController id="bD9-HU-F5j" customClass="OrganizationVC" customModule="OneDay" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tOp-tk-f0a"/>
+                        <viewControllerLayoutGuide type="bottom" id="VJq-4J-f5J"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Cvg-wV-bEG">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IFi-X2-6bv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1788" y="139"/>
         </scene>
         <!--Lanch Screen-->
         <scene sceneID="0mv-ne-DYD">
@@ -64,11 +106,12 @@
                     </view>
                     <connections>
                         <segue destination="vCc-vp-uYT" kind="show" identifier="feedVC" id="0UU-uT-68U"/>
+                        <segue destination="VuE-Wx-gtm" kind="show" identifier="sac" id="nlT-tq-bb7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5BG-LD-TNu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="380" y="138.98050974512745"/>
+            <point key="canvasLocation" x="-417" y="-537"/>
         </scene>
         <!--FeedVC-->
         <scene sceneID="tne-QT-ifu">
@@ -92,6 +135,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="09Y-kK-SXT" id="eSs-aC-JXS">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <color key="tintColor" red="0.33333333333333331" green="0.8784313725490196" blue="0.85098039215686272" alpha="1" colorSpace="calibratedRGB"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -110,27 +154,47 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="h2p-aX-V54">
                                 <rect key="frame" x="16" y="7" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="trophy-gray"/>
-                                <connections>
-                                    <segue destination="5D8-Yw-mGu" kind="presentation" id="RFw-si-4Ib"/>
-                                </connections>
+                                <state key="normal" image="trophy-new"/>
                             </button>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="BjL-8E-tID" id="nNT-2F-Ico"/>
+                        <outlet property="trophyBtn" destination="h2p-aX-V54" id="d4b-RY-qEi"/>
+                        <segue destination="bD9-HU-F5j" kind="show" identifier="org" id="cxn-kI-Iyf"/>
+                        <segue destination="5D8-Yw-mGu" kind="presentation" identifier="topListVC" id="odh-M4-cTj"/>
+                        <segue destination="VuE-Wx-gtm" kind="presentation" identifier="auth" id="zsj-GH-gkU"/>
+                        <segue destination="O0w-Hx-0uN" kind="presentation" identifier="showInfoVC" id="WbG-yX-K5g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1076" y="138.98050974512745"/>
+            <point key="canvasLocation" x="1076" y="139"/>
+        </scene>
+        <!--InfoVC-->
+        <scene sceneID="mqO-b8-tsL">
+            <objects>
+                <viewController id="O0w-Hx-0uN" customClass="InfoVC" customModule="OneDay" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FIL-nA-IYB"/>
+                        <viewControllerLayoutGuide type="bottom" id="eue-o5-Ill"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hDs-sM-E7j">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VLH-gH-JF3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1076" y="978"/>
         </scene>
         <!--Nav Bar-->
         <scene sceneID="g8o-E2-9QH">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vCc-vp-uYT" customClass="NavBar" customModule="OneDay" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="cKb-tx-zOF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="cKb-tx-zOF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -146,6 +210,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="trophy-gray" width="700" height="700"/>
+        <image name="trophy-new" width="700" height="700"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="zsj-GH-gkU"/>
+        <segue reference="0UU-uT-68U"/>
+        <segue reference="odh-M4-cTj"/>
+    </inferredMetricsTieBreakers>
 </document>

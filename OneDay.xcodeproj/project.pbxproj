@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		59422F111ECB9C090048324C /* InfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59422F101ECB9C090048324C /* InfoVC.swift */; };
 		595E1CED1E8D185B00CB2DD8 /* TopListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595E1CEC1E8D185B00CB2DD8 /* TopListCell.swift */; };
 		595E1CEF1E8D277E00CB2DD8 /* LanchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595E1CEE1E8D277E00CB2DD8 /* LanchScreen.swift */; };
 		595E1CF11E8D963800CB2DD8 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595E1CF01E8D963800CB2DD8 /* DataService.swift */; };
@@ -21,11 +22,12 @@
 		598E64CB1E8AAD41001967B5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 598E64CA1E8AAD41001967B5 /* GoogleService-Info.plist */; };
 		598E64CD1E8AB284001967B5 /* OrganizationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598E64CC1E8AB284001967B5 /* OrganizationCell.swift */; };
 		598E64D91E8ABB3A001967B5 /* SFDisplay-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 598E64D81E8ABB3A001967B5 /* SFDisplay-Light.otf */; };
-		598E64DA1E8ABC88001967B5 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 598E64B61E8AA695001967B5 /* Info.plist */; };
 		598E64DF1E8ABCA4001967B5 /* SFDisplay-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 598E64DB1E8ABCA4001967B5 /* SFDisplay-Medium.otf */; };
 		598E64E01E8ABCA4001967B5 /* SFDisplay-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 598E64DC1E8ABCA4001967B5 /* SFDisplay-Regular.otf */; };
 		598E64E11E8ABCA4001967B5 /* SFDisplay-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 598E64DD1E8ABCA4001967B5 /* SFDisplay-Semibold.otf */; };
 		598E64E21E8ABCA4001967B5 /* SFDisplay-Ultralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 598E64DE1E8ABCA4001967B5 /* SFDisplay-Ultralight.otf */; };
+		59C564071E95753300CDAE39 /* OrganizationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C564061E95753300CDAE39 /* OrganizationVC.swift */; };
+		59CB90111E9ADEDB005F0B6F /* AccountCreated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CB90101E9ADEDB005F0B6F /* AccountCreated.swift */; };
 		59F254C11E8ACE8D00F83C3D /* NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F254C01E8ACE8D00F83C3D /* NavBar.swift */; };
 		59F254C31E8AD0FE00F83C3D /* TopListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F254C21E8AD0FE00F83C3D /* TopListVC.swift */; };
 		B25AE83DEDBA07991F382365 /* Pods_OneDay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049A24297D7DAEB6580D901B /* Pods_OneDay.framework */; };
@@ -33,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		049A24297D7DAEB6580D901B /* Pods_OneDay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneDay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		59422F101ECB9C090048324C /* InfoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoVC.swift; sourceTree = "<group>"; };
 		595E1CEC1E8D185B00CB2DD8 /* TopListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopListCell.swift; sourceTree = "<group>"; };
 		595E1CEE1E8D277E00CB2DD8 /* LanchScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanchScreen.swift; sourceTree = "<group>"; };
 		595E1CF01E8D963800CB2DD8 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
@@ -53,6 +56,8 @@
 		598E64DC1E8ABCA4001967B5 /* SFDisplay-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFDisplay-Regular.otf"; sourceTree = "<group>"; };
 		598E64DD1E8ABCA4001967B5 /* SFDisplay-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFDisplay-Semibold.otf"; sourceTree = "<group>"; };
 		598E64DE1E8ABCA4001967B5 /* SFDisplay-Ultralight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFDisplay-Ultralight.otf"; sourceTree = "<group>"; };
+		59C564061E95753300CDAE39 /* OrganizationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganizationVC.swift; sourceTree = "<group>"; };
+		59CB90101E9ADEDB005F0B6F /* AccountCreated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountCreated.swift; sourceTree = "<group>"; };
 		59F254C01E8ACE8D00F83C3D /* NavBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavBar.swift; sourceTree = "<group>"; };
 		59F254C21E8AD0FE00F83C3D /* TopListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopListVC.swift; sourceTree = "<group>"; };
 		AB6AEED2F6B562D203D066E9 /* Pods-OneDay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneDay.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OneDay/Pods-OneDay.debug.xcconfig"; sourceTree = "<group>"; };
@@ -166,9 +171,12 @@
 			isa = PBXGroup;
 			children = (
 				598E64C41E8AA8B5001967B5 /* FeedVC.swift */,
+				59CB90101E9ADEDB005F0B6F /* AccountCreated.swift */,
 				595E1CEE1E8D277E00CB2DD8 /* LanchScreen.swift */,
 				59F254C01E8ACE8D00F83C3D /* NavBar.swift */,
 				59F254C21E8AD0FE00F83C3D /* TopListVC.swift */,
+				59C564061E95753300CDAE39 /* OrganizationVC.swift */,
+				59422F101ECB9C090048324C /* InfoVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -212,7 +220,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Henningsson Company";
 				TargetAttributes = {
 					598E64A31E8AA695001967B5 = {
@@ -249,7 +257,6 @@
 				598E64DF1E8ABCA4001967B5 /* SFDisplay-Medium.otf in Resources */,
 				598E64E11E8ABCA4001967B5 /* SFDisplay-Semibold.otf in Resources */,
 				598E64E01E8ABCA4001967B5 /* SFDisplay-Regular.otf in Resources */,
-				598E64DA1E8ABC88001967B5 /* Info.plist in Resources */,
 				598E64D91E8ABB3A001967B5 /* SFDisplay-Light.otf in Resources */,
 				598E64E21E8ABCA4001967B5 /* SFDisplay-Ultralight.otf in Resources */,
 				598E64B21E8AA695001967B5 /* Assets.xcassets in Resources */,
@@ -316,7 +323,9 @@
 				5978BDC41E904F28005AB5F5 /* TopListPost.swift in Sources */,
 				59F254C31E8AD0FE00F83C3D /* TopListVC.swift in Sources */,
 				598E64CD1E8AB284001967B5 /* OrganizationCell.swift in Sources */,
+				59422F111ECB9C090048324C /* InfoVC.swift in Sources */,
 				595E1CF31E8D972400CB2DD8 /* FeedPost.swift in Sources */,
+				59C564071E95753300CDAE39 /* OrganizationVC.swift in Sources */,
 				598E64C91E8AAA43001967B5 /* Constants.swift in Sources */,
 				595E1CEF1E8D277E00CB2DD8 /* LanchScreen.swift in Sources */,
 				595E1CF11E8D963800CB2DD8 /* DataService.swift in Sources */,
@@ -324,6 +333,7 @@
 				598E64A81E8AA695001967B5 /* AppDelegate.swift in Sources */,
 				598E64C71E8AAA06001967B5 /* Extension.swift in Sources */,
 				59F254C11E8ACE8D00F83C3D /* NavBar.swift in Sources */,
+				59CB90111E9ADEDB005F0B6F /* AccountCreated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,7 +391,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -425,7 +435,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

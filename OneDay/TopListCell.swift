@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class TopListCell: UITableViewCell {
     
@@ -40,6 +41,7 @@ class TopListCell: UITableViewCell {
     }()
     
     var post: TopListPost!
+    var user = FIRAuth.auth()?.currentUser
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -50,6 +52,15 @@ class TopListCell: UITableViewCell {
         self.post = post
         self.topListName.text = post.displayName
         self.topListPoints.text = "\(post.points)p"
+        
+        if self.topListName.text == user!.displayName {
+            self.topListName.font = UIFont(name: SF_SEMIBOLD, size: 15)!
+            self.topListName.textColor = logoBlue
+            self.topListPoints.font = UIFont(name: SF_SEMIBOLD, size: 15)!
+            self.topListPoints.textColor = logoBlue
+        } else {
+            print("Kal: user does not exist!")
+        }
         
         addSubview(topListName)
         addSubview(topListPoints)

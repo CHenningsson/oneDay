@@ -22,9 +22,16 @@ let PRIMARY_TEXT = UIColor(red: 0 / 255, green: 0 / 255, blue: 0 / 255, alpha: 0
 let SECONDARY_TEXT = UIColor(red: 0 / 255, green: 0 / 255, blue: 0 / 255, alpha: 0.54)
 let HINT_TEXT = UIColor(red: 0 / 255, green: 0 / 255, blue: 0 / 255, alpha: 0.38)
 let DIVIDERS = UIColor(red: 0 / 255, green: 0 / 255, blue: 0 / 255, alpha: 0.12)
+let logoBlue = UIColor(red: 85 / 255, green: 224 / 255, blue: 217 / 255, alpha: 1)
 
 //SEUGE
 let SEUGE_FEEDVC = "feedVC"
+let SEGUE_ORGANIZATION = "org"
+let SEUGE_ACCUONT_CREATED = "sac"
+let SEUGE_DONE = "done"
+let SEUGE_TOPLIST = "topListVC"
+let SEUGE_AUTH = "auth"
+let SEUGE_TOPLIST_FROM_AC = "fromac"
 
 //Cell ID
 let cellId = "cellId"

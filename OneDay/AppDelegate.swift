@@ -99,3 +99,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String?, annotation: nil)
     }
 }
+
+let ad = UIApplication.shared.delegate as! AppDelegate
+let context =  ad.persistentContainer.viewContext

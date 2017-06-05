@@ -15,7 +15,7 @@ class NavBar: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: SF_LIGHT, size: 20)!, NSForegroundColorAttributeName: PRIMARY_TEXT]
+        navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: SF_REGULAR, size: 20)!, NSForegroundColorAttributeName: SECONDARY_TEXT]
         
         navBar.layer.shadowColor = UIColor(white: 0, alpha: 0.2).cgColor
         navBar.layer.shadowOpacity = 1

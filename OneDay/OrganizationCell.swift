@@ -24,6 +24,10 @@ class OrganizationCell: UITableViewCell {
         on.text = "Rädda Barnen"
         on.font = UIFont(name: SF_MEDIUM, size: 24)!
         on.textColor = .white
+        on.layer.shadowColor = UIColor(white: 0, alpha: 1).cgColor
+        on.layer.shadowOffset = CGSize(width: 4, height: 2)
+        on.layer.shadowRadius = 5
+        on.layer.shadowOpacity = 0.8
         
         return on
     }()
@@ -45,7 +49,7 @@ class OrganizationCell: UITableViewCell {
             let ref = FIRStorage.storage().reference(forURL: post.IMAGEURL)
             ref.data(withMaxSize: 2 * 1024 * 1024, completion: { (data, error) in
                 if error != nil {
-                    print("Unable to download image from Firebase Storage, \(error?.localizedDescription)")
+                    print("Unable to download image from Firebase Storage, \(String(describing: error?.localizedDescription))")
                 } else {
                     if let imgData = data {
                         print("image downloaded")

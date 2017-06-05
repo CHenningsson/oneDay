@@ -10,14 +10,17 @@ import UIKit
 import Firebase
 import FBSDKCoreKit
 import FBSDKLoginKit
+import Social
 
 class TopListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     
+    var pp = 0
+    
     let topTenLbl: UILabel = {
         let tt = UILabel()
-        tt.text = "Topp 10"
+        tt.text = "Topplistan"
         tt.font = UIFont(name: SF_MEDIUM, size: 30)!
         tt.textColor = PRIMARY_TEXT
         tt.textAlignment = .left
@@ -27,7 +30,7 @@ class TopListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let closeBtn: UIButton = {
         let cBtn = UIButton(type: .custom)
-        cBtn.setImage(UIImage(named: "closeBtn"), for: .normal)
+        cBtn.setImage(UIImage(named: "closeBtn-new"), for: .normal)
         cBtn.addTarget(self, action: #selector(dismissTopList), for: .touchUpInside)
         
         return cBtn
@@ -35,7 +38,6 @@ class TopListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let points: UILabel = {
         let p = UILabel()
-        p.text = "Dina Poäng: \(FeedVC.localPoints)p"
         p.font = UIFont(name: SF_REGULAR, size: 17)!
         p.textColor = SECONDARY_TEXT
         p.textAlignment = .left
@@ -50,29 +52,57 @@ class TopListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return s
     }()
     
-    let showWholeTopList: UIButton = {
-        let swtt = UIButton(type: .system)
-        swtt.tintColor = HINT_TEXT
-        swtt.setTitle("Visa Hela Topp Listan", for: .normal)
-        swtt.titleLabel?.font = UIFont(name: SF_LIGHT, size: 15)!
-        swtt.addTarget(self, action: #selector(showTopList), for: .touchUpInside)
+    let showWholeTopList: UILabel = {
+        let swtt = UILabel()
+        swtt.textColor = HINT_TEXT
+        swtt.text = "Ta en screenshot och dela på Facebook eller Twitter"
+        swtt.font = UIFont(name: SF_LIGHT, size: 15)!
+        swtt.numberOfLines = 0
+        swtt.textAlignment = .center
         
         return swtt
     }()
     
-    let shareOnFacebook: UIButton = {
+    let share: UIButton = {
         let sof = UIButton(type: .custom)
-        sof.setImage(UIImage(named: "fb-logo"), for: .normal)
-        sof.addTarget(self, action: #selector(loginToFacebook), for: .touchUpInside)
+        sof.setImage(UIImage(named: "share-new"), for: .normal)
+        sof.addTarget(self, action: #selector(shareToFacebook), for: .touchUpInside)
         
         return sof
     }()
     
     var topListPosts = [TopListPost]()
     var user = FIRAuth.auth()?.currentUser
+    static var pointsUser: Int = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if currentReachabilityStatus != .notReachable {
+            
+            DataService.ds.REF_USERS.queryOrdered(byChild: "points").observe(.value, with: { (snapshot) in
+                self.topListPosts = []
+                if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                    for snap in snapshot {
+                        if let postDict = snap.value as? Dictionary<String, AnyObject> {
+                            let key = snap.key
+                            let post = TopListPost(postKey: key, postData: postDict)
+                            self.topListPosts.append(post)
+                        }
+                    }
+                }
+                self.tableView.reloadData()
+            }, withCancel: nil)
+            
+            DataService.ds.REF_USERS.child(user!.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                let point = value?["points"] as? Int
+                self.pp = point!
+                self.points.text = "Dina Poäng: \(self.pp)p"
+                print("Kal: \(self.pp)")
+            })
+        }
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -82,7 +112,7 @@ class TopListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         view.addSubview(points)
         view.addSubview(seperator)
         view.addSubview(showWholeTopList)
-        view.addSubview(shareOnFacebook)
+        view.addSubview(share)
         
         let rightConstant = view.frame.width / 4 - 25
         
@@ -91,75 +121,58 @@ class TopListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         _ = points.anchor(topTenLbl.bottomAnchor, left: view.leftAnchor, bottom: nil, right: nil, topConstant: 10, leftConstant: 20, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         _ = seperator.anchor(points.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 10, leftConstant: 20, bottomConstant: 0, rightConstant: 20, widthConstant: 0, heightConstant: 1)
         _ = tableView.anchor(seperator.bottomAnchor, left: view.leftAnchor, bottom: showWholeTopList.topAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 20, bottomConstant: 10, rightConstant: 20, widthConstant: 0, heightConstant: 0)
-        _ = showWholeTopList.anchor(nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: nil, topConstant: 0, leftConstant: 0, bottomConstant: 20, rightConstant: 20, widthConstant: view.frame.width / 2, heightConstant: 50)
-        _ = shareOnFacebook.anchor(nil, left: nil, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 20, rightConstant: rightConstant, widthConstant: 50, heightConstant: 50)
-        
-            if currentReachabilityStatus != .notReachable {
-                DataService.ds.REF_USERS.queryOrdered(byChild: "points").observe(.value, with: { (snapshot) in
-                    self.topListPosts = []
-                    if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
-                        for snap in snapshot {
-                            if let postDict = snap.value as? Dictionary<String, AnyObject> {
-                                let key = snap.key
-                                let post = TopListPost(postKey: key, postData: postDict)
-                                self.topListPosts.append(post)
-                            }
-                        }
-                    }
-                    self.tableView.reloadData()
-                }, withCancel: nil)
-            }
-        
-        tableView.isScrollEnabled = false
-        
-        FIRAuth.auth()!.addStateDidChangeListener() { auth, user in
-            if user != nil  {
-                self.tableView.reloadData()
-                print("Kal:")
-            }
-        }
+        _ = showWholeTopList.anchor(nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: nil, topConstant: 0, leftConstant: 20, bottomConstant: 20, rightConstant: 20, widthConstant: view.frame.width / 2, heightConstant: 50)
+        _ = share.anchor(nil, left: nil, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 20, rightConstant: rightConstant, widthConstant: 50, heightConstant: 50)
     }
     
-    func loginToFacebook() {
+    func shareToFacebook() {
         
-        if user != nil {
-            print("Kal: User is sign in")
-        } else {
-            let facebookLogin = FBSDKLoginManager()
-            facebookLogin.logIn(withReadPermissions: ["email"], from: self) { (result, error) in
-                if error != nil {
-                    print("Kal: Unable to authenticate with Facebook - \(error)")
-                } else if result?.isCancelled == true {
-                    print("Kal: User cancelled authentication")
-                } else {
-                    print("Kal: Successfully authenticated with Facebook")
-                    let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-                    self.firebaseAuth(credential)
-                }
-            }
-        }
-    }
-    
-    func firebaseAuth(_ credential: FIRAuthCredential) {
-        FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
-            if error != nil {
-                print("Kal: Unable to authenticate with Firebase - \(error)")
+        let alert = UIAlertController(title: "Dela", message: "Dela dina poäng med dina vänner!", preferredStyle: .actionSheet)
+        
+        let actionFacebook = UIAlertAction(title: "Dela på Facebook", style: .default) { (action) in
+            
+            if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook) {
+                let post = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+                post?.add(URL(string: "https://itunes.apple.com/se/app/oneday-microdonate/id1220479316?l=en&mt=8"))
+                
+                self.present(post!, animated: true, completion: nil)
+        
             } else {
-                print("Kal: Successfully authenticated with Firebase")
-//                self.userCreatedFacebook()
+                self.showAlertError(service: "Facebook")
             }
-        })
+        }
+        
+        let actionTwitter = UIAlertAction(title: "Dela på Twitter", style: .default) { (action) in
+            if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter) {
+                let post = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+                post?.setInitialText("Jag har nu \(self.pp) poäng! Hur många har du? \n\nhttps://itunes.apple.com/se/app/oneday-microdonate/id1220479316?l=en&mt=8")
+                
+                self.present(post!, animated: true, completion: nil)
+            } else {
+                self.showAlertError(service: "Twitter")
+            }
+        }
+        
+        let actionCancel = UIAlertAction(title: "Avbryt", style: .cancel, handler: nil)
+        
+        alert.addAction(actionFacebook)
+        alert.addAction(actionTwitter)
+        alert.addAction(actionCancel)
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
-    func userCreatedFacebook() {
-        let user: Dictionary<String, AnyObject> = [
-            "displayName": self.user!.displayName! as AnyObject,
-            "points": FeedVC.localPoints as AnyObject
-        ]
-        let firebaseUser = DataService.ds.REF_BASE.child("users").childByAutoId()
-        firebaseUser.setValue(user)
-    }
+    func showAlertError(service: String) {
     
+        let alert = UIAlertController(title: "Error", message: "Du är inte kopplad till \(service), gå till telefonens inställningar för att koppla upp dig.", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    
+    }
+ 
     func dismissTopList() {
         dismiss(animated: true, completion: nil)
     }
@@ -169,7 +182,7 @@ class TopListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             if user != nil {
                 return 1
             } else {
-                messageForUser(message: "Anslut med Facebook, för att se topp lisan. ", viewController: self)
+                messageForUser(message: "Anslut med Facebook, för att se topplisan. ", viewController: self)
                 return 0
             }
         } else {
@@ -196,10 +209,6 @@ class TopListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return tableView.frame.height / 10
-    }
-    
-    func showTopList() {
-        tableView.isScrollEnabled = true
     }
     
     func messageForUser(message: String, viewController: UIViewController) {

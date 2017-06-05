@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LanchScreen: UIViewController {
 
@@ -21,6 +22,13 @@ class LanchScreen: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//                let firebaseAuth = FIRAuth.auth()
+//                do {
+//                    try firebaseAuth?.signOut()
+//                } catch let signOutError as NSError {
+//                    print ("Error signing out: %@", signOutError)
+//                }
         
         view.addSubview(logo)
         _ = logo.anchor(view.centerYAnchor, left: view.centerXAnchor, bottom: nil, right: nil, topConstant: -100, leftConstant: -100, bottomConstant: 0, rightConstant: 0, widthConstant: 200, heightConstant: 200)
@@ -45,7 +53,20 @@ class LanchScreen: UIViewController {
                 self.logo.alpha = 0
                 
             }) { (true) in
-                self.performSegue(withIdentifier: SEUGE_FEEDVC, sender: nil)
+                
+                if FIRAuth.auth()?.currentUser != nil {
+                    self.performSegue(withIdentifier: SEUGE_FEEDVC, sender: nil)
+                } else {
+                    self.performSegue(withIdentifier: SEUGE_ACCUONT_CREATED, sender: nil)
+                }
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "sac" {
+            if let newVC = segue.destination as? AccountCreated {
+                newVC.segueDismiss = false
             }
         }
     }

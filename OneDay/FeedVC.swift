@@ -8,10 +8,12 @@
 
 import UIKit
 import Firebase
+import CoreData
 
 class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var trophyBtn: UIButton!
     
     let activityIndicator: UIActivityIndicatorView = {
         let ai = UIActivityIndicatorView()
@@ -21,29 +23,34 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return ai
     }()
     
-    static var localPoints: Int = 390
-    
     var feedPosts = [FeedPost]()
     static var imageCache: NSCache<NSString, UIImage> = NSCache()
+    let user = FIRAuth.auth()?.currentUser
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let firebaseAuth = FIRAuth.auth()
-        do {
-            try firebaseAuth?.signOut()
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
-        }
+        let rightButton = UIBarButtonItem(title: "?", style: .plain, target: self, action: #selector(showInfoVC))
+        rightButton.setTitleTextAttributes([ NSFontAttributeName: UIFont(name: SF_REGULAR, size: 27)!, NSForegroundColorAttributeName: logoBlue], for: .normal)
+        navigationItem.rightBarButtonItem = rightButton
+        
+//        let firebaseAuth = FIRAuth.auth()
+//        do {
+//            try firebaseAuth?.signOut()
+//        } catch let signOutError as NSError {
+//            print ("Error signing out: %@", signOutError)
+//        }
         
         tableView.delegate = self
         tableView.dataSource = self
         
-        self.title = "\(FeedVC.localPoints) p"
+        self.title = "OneDay - MicroDonate"
         
         view.addSubview(activityIndicator)
         _ = activityIndicator.anchor(view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
-        activityIndicator.stopAnimating()
+        activityIndicator.startAnimating()
+        
+        trophyBtn.addTarget(self, action: #selector(trophyBtnClicked), for: .touchUpInside)
         
         if currentReachabilityStatus != .notReachable {
         
@@ -52,6 +59,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 self.feedPosts = []
             
                 if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                    
                     for snap in snapshot {
                         if let postDict = snap.value as? Dictionary<String, AnyObject> {
                             let key = snap.key
@@ -63,6 +71,22 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 self.tableView.reloadData()
             }, withCancel: nil)
         }
+    }
+    
+    func showInfoVC() {
+        performSegue(withIdentifier: "showInfoVC", sender: self)
+    }
+    
+    func trophyBtnClicked() {
+        
+        FIRAuth.auth()?.addStateDidChangeListener({ (auth, user) in
+            if user != nil {
+                print("Kal: User is signed in")
+                self.performSegue(withIdentifier: SEUGE_TOPLIST, sender: nil)
+            } else {
+                self.performSegue(withIdentifier: SEUGE_AUTH, sender: nil)
+            }
+        })
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -101,6 +125,24 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return view.frame.height / 4
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let organizations = feedPosts[indexPath.row]
+        performSegue(withIdentifier: SEGUE_ORGANIZATION, sender: organizations)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let backBtn = UIBarButtonItem()
+        backBtn.title = ""
+        navigationItem.backBarButtonItem = backBtn
+        navigationController?.navigationBar.tintColor = logoBlue
+        
+        if let destination = segue.destination as? OrganizationVC {
+            if let organization = sender as? FeedPost {
+                destination.feedPost = organization
+            }
+        }
     }
     
     func messageForUser(message: String, viewController: UIViewController) {
